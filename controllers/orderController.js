@@ -1,5 +1,5 @@
 /**
- * Project : saveOrder
+ * Project : saveOrder Controller
  * Description :Orders routes.
  * CreateBy : Nizam
  * Date : 21-10-2022
@@ -19,6 +19,7 @@ let orderController ={
      */
     saveOrder: async (req, res, next) => {
 		try {
+            // Incase of using database used Transaction begin commit and rocllback.
 			var saveOrder = await orderService.saveOderService(req,res,next)
 			if(!_.isEmpty(saveOrder))
 			return res.send(ResponseHandler.successResponse(saveOrder, messages.ORDER_SAVE));
