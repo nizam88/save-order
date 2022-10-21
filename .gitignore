@@ -1,0 +1,14 @@
+# Created by Nizam
+# Date 21-10-2022
+
+# Dependency directories
+node_modules
+
+# Package dependecies
+package-lock.json
+
+# dotenv environment variables file
+.env
+!.env*.example
+
+#Ends

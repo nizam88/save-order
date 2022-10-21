@@ -1,0 +1,26 @@
+[
+        {
+            "id": 1,
+            "name": "Watch-1",
+            "price": "10.00",
+            "stock": 1
+        },
+        {
+            "id": 2,
+            "name": "Watch-2",
+            "price": "20.00",
+            "stock": 2
+        },
+        {
+            "id": 3,
+            "name": "Watch-3",
+            "price": "30.00",
+            "stock": 3
+        },
+        {
+            "id": 4,
+            "name": "Watch-4",
+            "price": "40.00",
+            "stock": 0
+        }
+    ]
