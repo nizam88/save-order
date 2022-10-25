@@ -19,10 +19,20 @@ let orderController ={
      */
     saveOrder: async (req, res, next) => {
 		try {
-            // Incase of using database used Transaction begin commit and rocllback.
+       // Incase of using database used Transaction begin commit and rocllback.
 			var saveOrder = await orderService.saveOderService(req,res,next)
-			if(!_.isEmpty(saveOrder))
-			return res.send(ResponseHandler.successResponse(saveOrder, messages.ORDER_SAVE));
+      console.log(saveOrder.type);
+      switch (saveOrder.type) {
+        case "duplicate":
+          return res.send(ResponseHandler.customeResponse(saveOrder, messages.DUPLICATE_ORDER_SAVE));  
+          break;
+          case "new":
+          return res.send(ResponseHandler.successResponse(saveOrder, messages.ORDER_SAVE)); 
+          break; 
+        default:
+          break;
+      }
+			
 			} catch (error) {
 			next(error);
 		}

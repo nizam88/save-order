@@ -47,14 +47,15 @@ const ErrorHandler = require('../utils/responseHandler');
                 throw new Error(messages.INVENTORY_NOT_EXITS);
             }
         })
-        .custom(async (value, { req }) => {
-            var productId = req.body.product_id;
-            var userId = req.body.user_id;
-            const checkDuplicateOrder = await Helper.checkDuplicateOrder(userId,productId);
-            if (!_.isEmpty(checkDuplicateOrder)) {
-                throw new Error(messages.DUPLICATE_ORDER_EXITS);
-            }
-        }),
+        // .custom(async (value, { req }) => {
+        //     var productId = req.body.product_id;
+        //     var userId = req.body.user_id;
+        //     const checkDuplicateOrder = await Helper.checkDuplicateOrder(userId,productId);
+        //     if (!_.isEmpty(checkDuplicateOrder)) {
+        //         throw new Error(messages.DUPLICATE_ORDER_EXITS);
+        //     }
+        // })
+        ,
        (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) return res.send(ErrorHandler.errorAsBadRequest(res, JSON.stringify(errors)));

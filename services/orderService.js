@@ -7,6 +7,7 @@
 const jsonfile = require('jsonfile')
 const path = require('path');
 const _ = require('lodash');
+const Helper = require('../helpers/validationHelper');
 const orderModel = path.join(__dirname, '../models/orders.json');
 
 let orderService ={
@@ -22,22 +23,31 @@ let orderService ={
     saveOderService : async(req,res,next)=>{
         try {
         let orderJson      = await jsonfile.readFileSync(orderModel);
+        const userId       = req.body.user_id;
+        const productId    = req.body.product_id;
+        const quantity     = req.body.quantity;
         let orderRequest   ={
             order_id  :_.random(0, 1000),
-            user_id   :req.body.user_id,
-            product_id:req.body.product_id,
-            quantity  :req.body.quantity
+            user_id   :userId,
+            product_id:productId,
+            quantity  :quantity
         }
         if(!_.isEmpty(orderJson)) { 
-        
         var finalRequestOrder =[orderRequest, ...orderJson]
         }else{
         var finalRequestOrder =[orderRequest]
         }
-        let orderSave    = await  jsonfile.writeFileSync(orderModel, finalRequestOrder, { spaces: 2, EOL: '\r\n' })
-        if(finalRequestOrder){
-            return req.body;
-        }
+        await  jsonfile.writeFileSync(orderModel, finalRequestOrder, { spaces: 2, EOL: '\r\n' })
+        const checkDuplicateOrder = await Helper.checkDuplicateOrder(userId,productId);
+        var  orderSuccess ={
+            "order":"Success"
+           };
+             if (_.size(checkDuplicateOrder)>1) {
+                return {type:"duplicate",...orderSuccess};
+             }else{
+                return {type:"new",...orderSuccess};
+             }
+
         } catch (error) {
         return next(error) 
       }
