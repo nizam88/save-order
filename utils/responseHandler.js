@@ -10,7 +10,7 @@ module.exports = {
     },
     customeResponse: (statusCode, message) => {
         return {
-            statusCode:  httpResponse.OK,
+            statusCode:  httpResponse.ALREADY_EXIST,
             message: message ?  message : 'Success',
         };
     },
@@ -25,6 +25,14 @@ module.exports = {
             message: message ?  message : 'Internal server error',
             error: error,
             
+        };
+    },
+    createResponseObject :(statusCode, message,data,error) =>{
+        return {
+            statusCode: statusCode ?  statusCode :  httpResponse.OK,
+            message: message ?  message : 'Success',
+            data: data,
+            error:error
         };
     },
     UnauthorizedResponse: (error, message) => {

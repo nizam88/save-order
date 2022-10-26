@@ -1,7 +1,11 @@
 # save-order
 Save order items on the basis of inventory check and duplicate order check
 
-2. rename `.env-sample` to `.env` in the file the DB connection string need to be updated according to your `credentials`.
+## Requirements
+
+[Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/en/starter/installing.html)
+
+ rename `.env-sample` to `.env` in the file the DB connection string need to be updated according to your `credentials`.
 
 ### Run the app locally
 
@@ -49,8 +53,35 @@ The application exposes a REST endpoints
     "quantity":1
 }'
 
+## Success
+{
+    "statusCode": 200,
+    "message": "Order save successfully."
+}
+## Duplicate order
+{
+    "statusCode": 409,
+    "message": "You have placed duplicate order."
+}
+
+## Error
+
+{
+    "statusCode": 400,
+    "message": "Error",
+    "data": [],
+    "error": "{\"errors\":[{\"value\":\"15\",\"msg\":\"Product Inventory not exits.\",\"param\":\"quantity\",\"location\":\"body\"}]}"
+}
 
 
-## Note
+## Note-1
+logging
+security
+middleware
+database
+Above these are not used: if you want i will make a complete application and share again.
 
+## Note-2
 If you wants to same codebase with typescript and express i will do the same and share to you.
+
+
