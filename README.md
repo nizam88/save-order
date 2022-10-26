@@ -10,9 +10,9 @@ Save order items on the basis of inventory check and duplicate order check
 ### Run the app locally
 
 - git clone https://github.com/nizam88/save-order.git
-
+-`cd save-order` - Goto repository
 - `npm install`
-- `nodemon index.js"` - This will start the application and run on port 3000
+- `nodemon index.js` - This will start the application and run on port 3000
 
 you can change port in `.env` file check `.env-sample`
 
